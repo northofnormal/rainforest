@@ -1,6 +1,2 @@
 <h1>Products#index</h1>
-	<% @products.each do |product| %>
-		<p><strong>Product: </strong><%= @product[:title] %></p>
-		<p><strong>Description: </strong><%= @product[:description] %></p>
-		<p><strong>Price: </strong><%= @product[:price_in_cents]/100 %></p>
-	<% end %>
+	<%= render @products %>
