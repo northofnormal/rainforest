@@ -1,2 +1,5 @@
 <h1>Products#show</h1>
-	<%= render @products %>
+
+	<p><strong>Product: </strong><%= @product[:name] %></p>
+	<p><strong>Description: </strong><%= @product[:description] %></p>
+	<p><strong>Price: </strong><%= @product.formatted_price %></p>

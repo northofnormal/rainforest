@@ -33,13 +33,15 @@ class ProductsController < ApplicationController
   def create
   	@product = Product.new(params.require(:product).permit(:name, :description, :price_in_cents))
 
-  	if @product.save
-  		format.html { redirect_to @product, notice: "Product was successfully created" }
-  		format.json { render json: @product, status: :created, location: @product }
-  	else
-  		format.html { render action: "new" }
-  		format.json { render json: @product.errors, status: :unprocessable_entity }
-  	end
+  	respond_to do |format|
+			if @product.save
+				format.html { redirect_to @product, notice: 'Product was successfully created.' }
+				format.json { render json: @product, status: :created, location: @product }
+			else
+				format.html { render action: "new" }
+				format.json { render json: @product.errors, status: :unprocessable_entity }
+			end
+		end
   end
 
   def update
