@@ -1,5 +1,31 @@
-<h1>Products#show</h1>
+<h1>Products</h1>
 
 	<p><strong>Product: </strong><%= @product[:name] %></p>
 	<p><strong>Description: </strong><%= @product[:description] %></p>
 	<p><strong>Price: </strong><%= @product.formatted_price %></p>
+
+	<% if current_user %>
+		<h3>User Reviews For <%= @product.name %></h3>
+			<% @product.reviews.each do |r| %>
+				<p><%= r.comment %><br>
+					<% if @review.user != nil %>
+					<em>Reviewed by: <%= review.user.email %></p>
+					<% end %>
+			<% end %>
+
+		<h3>Add A New Review</h3>
+			<%= form_for ([@product, @review]) do |pr| %>
+				<% if @review.errors.any? %>
+					<h2><%= pluralize(@review.errors.count, "error") %> prohibited this review from being saved.</h2>
+					<ul>
+						<%= @review.errors.each do |msg| %>
+						<li><%= msg %></li>
+						<% end %>
+					</ul>
+				<% end %>
+				<p><%= pr.label :comment %>: <%= pr.text_field :comment %><br>
+					<%= pr.submit %>
+			<% end %>
+	<% else %>
+  <p>Please <%= link_to "log in", new_session_path %> to add a review.</p> 
+	<% end %>

@@ -4,5 +4,5 @@ class User < ActiveRecord::Base
 	validates_presence_of :email
 
 	has_many :reviews
-	has_many :products :through => :reviews
+	has_many :products, through: :reviews
 end
